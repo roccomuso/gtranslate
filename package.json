@@ -1,0 +1,40 @@
+{
+  "name": "gtranslate",
+  "version": "1.0.0",
+  "description": "Google translate CLI tool",
+  "main": "index.js",
+  "preferGlobal": true,
+  "bin": {
+    "gtranslate": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roccomuso/gtranslate.git"
+  },
+  "keywords": [
+    "google",
+    "translate",
+    "cli",
+    "tool",
+    "language",
+    "locale"
+  ],
+  "author": "Rocco Musolino (roccomuso)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/roccomuso/gtranslate/issues"
+  },
+  "homepage": "https://github.com/roccomuso/gtranslate#readme",
+  "dependencies": {
+    "boxen": "^1.1.0",
+    "chalk": "^2.0.1",
+    "google-translate": "^2.0.5",
+    "yargs": "^8.0.2"
+  },
+  "devDependencies": {
+    "standard": "^10.0.2"
+  }
+}
