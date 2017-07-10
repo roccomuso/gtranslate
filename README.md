@@ -19,7 +19,7 @@
 
 ## Usage
 
-1. Register and setup a new *API key** from the [Google Cloud](https://support.google.com/cloud/answer/6158862?hl=en).
+1. Register and setup a new **API key** from the [Google Cloud](https://support.google.com/cloud/answer/6158862?hl=en).
 
 2. type `gtranslate register <API_KEY>` with your APIKEY:
 
