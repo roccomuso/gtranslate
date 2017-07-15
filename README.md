@@ -25,11 +25,44 @@
 
 **TODO... screen gif**
 
+**Heads Up**! The API_KEY is stored in your home directory in a file called `.gtranslate`
+
 3. That's it!
 
 **TODO... screen gif**
 
-**Heads Up**! The API_KEY is stored in your home directory in a file called `.gtranslate.key`
+### Common usage
+
+Register a new `API_KEY`:
+
+    $ gtranslate -r <API_KEY>
+
+Translate with language autodetect and default target language:
+
+    $ gtranslate <text>
+
+Basic translation (with source language autodetect):
+
+    $ gtranslate -t en <text>
+
+Provide the `--source (-s)` language:
+
+    $ gtranslate -s it -t en <text>
+
+Set a default target language:
+
+    $ gtranslate --set-target it
+
+(By default EN is the default target language)
+
+## Available options
+
+```text
+--register OR -r     Set a new Google Translate API KEY
+--source OR -s     Provide the source language
+--target OR -t     Provide the target language
+--set-target OR -st     Set a default target language [EN by default]
+```
 
 ## Author
 
