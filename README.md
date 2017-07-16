@@ -9,8 +9,6 @@
 
 > Node.js Google translate CLI tool!
 
-**Work in progress...**
-
 ## Install
 
     $ npm install -g gtranslate
@@ -23,13 +21,9 @@
 
 2. type `gtranslate register <API_KEY>` with your APIKEY:
 
-**TODO... screen gif**
-
 **Heads Up**! The API_KEY is stored in your home directory in a file called `.gtranslate`
 
 3. That's it!
-
-**TODO... screen gif**
 
 ### Common usage
 
