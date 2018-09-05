@@ -23,7 +23,7 @@ if (argv.st) {
 var googleTranslate = require('google-translate')(API_KEY)
 
 googleTranslate.translate(argv.text, argv.source, argv.target || config.getTargetLang(), function (err, translation) {
-  if (err) return exit(err.message, 1)
+  if (err) return exitWithError(err)
   var translatedText = translation.translatedText
   var sourceLanguage = translation.detectedSourceLanguage || argv.source
   var targetLanguage = translation.targetLanguage
@@ -33,4 +33,20 @@ googleTranslate.translate(argv.text, argv.source, argv.target || config.getTarge
 function exit (msg, code) {
   console.log(msg)
   process.exit(code || 0)
+}
+
+// tests which kind of error occured and handles correctly
+// in case for example we get a status 403 from the API this will have
+// an error and a body inside the error that we should display
+// can be reproduced by using an invalid key or a key without persmissions
+function exitWithError(err) {
+  var hasErrorBody = err['response'] && err['response']['body']
+  if (!hasErrorBody) return exit(err.message, 1)
+
+  var body = JSON.parse(err['response']['body'])
+  var hasMessage = body['error'] && body['error']['message']
+  if (!hasMessage) return exit(body, 1)
+
+  var message = body['error']['message']
+  return exit(message, 1)
 }
