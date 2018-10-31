@@ -2,13 +2,14 @@
   "name": "gtranslate",
   "version": "1.0.0",
   "description": "Google translate CLI tool",
-  "main": "index.js",
+  "main": "./bin/cli.js",
   "preferGlobal": true,
   "bin": {
     "gtranslate": "./bin/cli.js"
   },
   "scripts": {
-    "test": "standard"
+    "test": "./node_modules/mocha/bin/mocha",
+    "test-watch": "./node_modules/mocha/bin/mocha -w"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,11 @@
     "yargs": "^8.0.2"
   },
   "devDependencies": {
-    "standard": "^10.0.2"
+    "standard": "^10.0.2",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  },
+  "standard": {
+    "env": ["mocha"]
   }
 }
