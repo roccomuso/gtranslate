@@ -57,6 +57,16 @@ Set a default target language:
 --set-target OR -st     Set a default target language [EN by default]
 ```
 
+## Build
+
+Clone this repository to your local folder, then link it to enable you to use the command line tool from your source folder using `npm link`.
+
+Then you can simply call `gtranslate -t it -s en "really cool"`.
+
+Don't forget to register your api key before using it as well.
+
+Tests are written in mocha and run by `npm test` or `npm run test-watch`.
+
 ## Author
 
 Rocco Musolino ([@roccomuso](https://twitter.com/roccomuso))
