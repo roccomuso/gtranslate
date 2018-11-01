@@ -7,10 +7,9 @@ chai.should()
 describe('boxed output', function () {
   it('should return boxed output if no brief option is given', function () {
     var result = runWithParameters('-s en -t no sandwich')
-    boxed(result.output).translation.should.equal('smørbrød')
-    boxed(result.output).sourceLanguage.should.equal('en')
-
-    // TODO: this should not be undefined
-    boxed(result.output).targetLanguage.should.equal('undefined')
+    var output = boxed(result.output)
+    output.translation.should.equal('smørbrød')
+    output.sourceLanguage.should.equal('en')
+    output.targetLanguage.should.equal('no')
   })
 })

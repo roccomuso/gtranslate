@@ -5,9 +5,10 @@ function trimBorders (boxedLine) {
   return boxedLine.replace(/│/g, '').trim()
 }
 
-function assertIsBoxed (lines) {
+function assertIsBoxed (content) {
+  var lines = content.split('\n')
   var numberOfLines = lines.length
-  numberOfLines.should.above(9)
+  numberOfLines.should.above(8, `expected output not boxed [${lines}]`)
 
   var secondLine = lines[1]
   secondLine.should.contain('┌').and.contain('────').and.contain('┐')
@@ -18,8 +19,8 @@ function assertIsBoxed (lines) {
 
 // Helper to "unwrap" boxed content
 module.exports = function (boxedContent) {
+  assertIsBoxed(boxedContent)
   var lines = boxedContent.split('\n')
-  assertIsBoxed(lines)
 
   var languages = trimBorders(lines[3]).split(' → ')
   var source = languages[0]

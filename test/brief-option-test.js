@@ -10,7 +10,7 @@ describe('brief option', function () {
     boxed(result.output).translation.should.equal('smörgås')
   })
 
-  it('should only return translation if brief input is supploed', function () {
+  it('should only return translation if brief input is supplied', function () {
     var result = runWithParameters('-s en -t sv -b sandwich')
     result.output.trim().should.equal('smörgås')
   })

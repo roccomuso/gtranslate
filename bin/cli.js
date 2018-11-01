@@ -15,18 +15,18 @@ if (argv.register) {
   exit(boxen('\u2714 KEY stored!', {align: 'center', borderColor: 'green', padding: 1, margin: 1}), 0)
 }
 
+var googleTranslate = require('google-translate')(API_KEY)
+
 if (argv.st) {
-  config.setTargetLang(argv.st)
+  config.setTargetLang(argv.st, googleTranslate)
   exit(boxen('\u2714 Target lang set!', {align: 'center', borderColor: 'green', padding: 1, margin: 1}), 0)
 }
-
-var googleTranslate = require('google-translate')(API_KEY)
 
 googleTranslate.translate(argv.text, argv.source, argv.target || config.getTargetLang(), function (err, translation) {
   if (err) return exitWithError(err)
   var translatedText = translation.translatedText
   var sourceLanguage = translation.detectedSourceLanguage || argv.source
-  var targetLanguage = translation.targetLanguage
+  var targetLanguage = translation.targetLanguage || argv.target
   if (argv.b)
     console.log(translatedText)
   else {
@@ -45,7 +45,7 @@ function exit (msg, code) {
 // can be reproduced by using an invalid key or a key without persmissions
 function exitWithError(err) {
   var hasErrorBody = err['response'] && err['response']['body']
-  if (!hasErrorBody) return exit(err.message, 1)
+  if (!hasErrorBody) return exit(err, 1)
 
   var body = JSON.parse(err['response']['body'])
   var hasMessage = body['error'] && body['error']['message']
