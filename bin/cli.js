@@ -27,7 +27,11 @@ googleTranslate.translate(argv.text, argv.source, argv.target || config.getTarge
   var translatedText = translation.translatedText
   var sourceLanguage = translation.detectedSourceLanguage || argv.source
   var targetLanguage = translation.targetLanguage
-  console.log(boxen(`${sourceLanguage} \u2192 ${targetLanguage}\n\n${translatedText} `, {align: 'center', borderColor: 'green', padding: 1, margin: 1}))
+  if (argv.b)
+    console.log(translatedText)
+  else {
+    console.log(boxen(`${sourceLanguage} \u2192 ${targetLanguage}\n\n${translatedText} `, {align: 'center', borderColor: 'green', padding: 1, margin: 1}))
+  }
 })
 
 function exit (msg, code) {

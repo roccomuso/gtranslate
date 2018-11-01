@@ -41,6 +41,8 @@
     "mocha": "^5.2.0"
   },
   "standard": {
-    "env": ["mocha"]
+    "env": [
+      "mocha"
+    ]
   }
 }
