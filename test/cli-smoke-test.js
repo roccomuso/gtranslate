@@ -3,13 +3,11 @@ var runWithParameters = require('./test-runner')
 
 chai.should()
 
-describe('cli-inputs', function () {
-  it('should fail with error if no input is given', function () {
+describe('cli base functionality', function () {
+  it('should fail with error if no target language is specified', function () {
     var result = runWithParameters('')
     result.code.should.equal(1)
-
-    // TODO: outcome is pending change. We ought to get a better response.
-    result.output.should.contain('undefined')
+    result.output.should.contain('No target language specified.')
   })
 
   it('should return boxed output given simple parameters', function () {
