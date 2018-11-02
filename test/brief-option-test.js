@@ -12,6 +12,6 @@ describe('brief option', function () {
 
   it('should only return translation if brief input is supplied', function () {
     var result = runWithParameters('-s en -t sv -b sandwich')
-    result.output.trim().should.equal('smörgås')
+    result.output.should.equal('smörgås')
   })
 })

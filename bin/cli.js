@@ -27,9 +27,9 @@ googleTranslate.translate(argv.text, argv.source, argv.target || config.getTarge
   var translatedText = translation.translatedText
   var sourceLanguage = translation.detectedSourceLanguage || argv.source
   var targetLanguage = translation.targetLanguage || argv.target
-  if (argv.b)
-    console.log(translatedText)
-  else {
+  if (argv.b) {
+    process.stdout.write(translatedText)
+  } else {
     console.log(boxen(`${sourceLanguage} \u2192 ${targetLanguage}\n\n${translatedText} `, {align: 'center', borderColor: 'green', padding: 1, margin: 1}))
   }
 })
@@ -43,7 +43,7 @@ function exit (msg, code) {
 // in case for example we get a status 403 from the API this will have
 // an error and a body inside the error that we should display
 // can be reproduced by using an invalid key or a key without persmissions
-function exitWithError(err) {
+function exitWithError (err) {
   var hasErrorBody = err['response'] && err['response']['body']
   if (!hasErrorBody) return exit(err, 1)
 
