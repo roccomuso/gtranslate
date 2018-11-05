@@ -1,59 +1,7 @@
 language: node_js
-stages:
-  - smoke
-  - lint
-  - precache
-  - test
-install:
-  - npm ci --ignore-scripts
+node_js:
+  - "node"
+script:
   - ./bin/cli.js --register ${api_key}
-
-# setup a smoke test for each environment to ensure it works
-- &smoke
-  stage: smoke
-  install: npm install --production --no-shrinkwrap
-  script: >
-    ./bin/mocha --opts /dev/null --reporter spec 
-    test/cli-smoke-test.js
-  cache:
-    directories:
-      - ~/.npm
-      - node_modules
-
-- <<: *smoke
-  node_js: '10'
-
-- <<: *smoke
-  node_js: '9'
-
-- <<: *smoke
-  node_js: '8'
-
-- <<: *smoke
-  node_js: '6'
-
-# this just warms up the node environment, script: true simply returns OK
-- stage: precache
-  script: true
-
-- stage: lint
-  script: npm start lint
-
-- script: COVERAGE=1 npm start test.node
-  after_success: npm start coveralls
-
-- &node
-  script: npm test
-  node_js: '10'
-
-- <<: *node
-  node_js: '9'
-
-- <<: *node
-  node_js: '8'
-
-- <<: *node
-  node_js: '6'
-
-- <<: *node
-  node_js: '4'
+  - npm test
+after_success: npm run coverage
