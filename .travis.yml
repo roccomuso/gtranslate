@@ -3,4 +3,4 @@ node_js:
   - "7"
 install:
   - npm install
-  - ./bin/cli.js --register ${API_KEY}
+  - ./bin/cli.js --register ${api_key}
