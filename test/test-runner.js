@@ -3,7 +3,7 @@ var exec = require('child_process').execSync
 // Helper function to execute the cli in tests and capture the output
 module.exports = function (parameters) {
   try {
-    var output = exec(`./bin/cli.js ${parameters}`).toString()
+    var output = exec(`./bin/cli.js ${parameters}`, { shell: false }).toString()
     return {
       output: output,
       code: 0
