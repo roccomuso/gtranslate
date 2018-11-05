@@ -8,6 +8,7 @@ describe('default language option', () => {
     runWithParameters('--set-target en', (result) => {
       result.output.should.contain('Target lang set!')
       done()
+      console.log('default language option test is done.')
     })
   })
 })
