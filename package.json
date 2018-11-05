@@ -8,7 +8,7 @@
     "gtranslate": "./bin/cli.js"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha",
+    "test": "./node_modules/mocha/bin/mocha --timeout 5000",
     "test-watch": "./node_modules/mocha/bin/mocha -w"
   },
   "repository": {
