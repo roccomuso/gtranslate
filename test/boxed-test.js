@@ -6,7 +6,7 @@ chai.should()
 
 describe('boxed output', () => {
   it('should return boxed output if no brief option is given', (done) => {
-    runWithParameters('-s en -t no sandwich', (result) => {
+    runWithParameters(['-s', '-en', '-t', 'no', 'sandwich'], (result) => {
       var output = boxed(result.output)
       output.translation.should.equal('smørbrød')
       output.sourceLanguage.should.equal('en')

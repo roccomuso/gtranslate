@@ -1,16 +1,20 @@
-var exec = require('child_process').exec
+var spawn = require('child_process').spawn
 
 // Helper function to execute the cli in tests and capture the output
-module.exports = function (parameters, onComplete) {
-  console.log('executing')
-  exec(`./bin/cli.js ${parameters}`, (error, stdout, stderr) => {
-    console.log('handling result')
-    if (error) {
-      console.log('resulted in error')
-      onComplete({ code: error.code, output: stdout, error: stderr })
-    } else {
-      console.log('resulted successfully')
-      onComplete({ code: 0, output: stdout, error: null })
-    }
+module.exports = function (args, onComplete) {
+  let result = {
+    code: 0,
+    output: '',
+    error: ''
+  }
+
+  let process = spawn('./bin/cli.js', args)
+
+  process.stdout.on('data', (data) => { result.output += data })
+  process.stderr.on('data', (data) => { result.error += data })
+
+  process.on('close', (code) => {
+    result.code = code
+    onComplete(result)
   })
 }
