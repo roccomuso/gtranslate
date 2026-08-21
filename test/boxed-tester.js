@@ -1,4 +1,4 @@
-var chai = require('chai')
+const chai = require('chai')
 chai.should()
 
 function trimBorders (boxedLine) {
@@ -6,25 +6,25 @@ function trimBorders (boxedLine) {
 }
 
 function assertIsBoxed (content) {
-  var lines = content.split('\n')
-  var numberOfLines = lines.length
+  const lines = content.split('\n')
+  const numberOfLines = lines.length
   numberOfLines.should.above(8, `expected output not boxed [${lines}]`)
 
-  var secondLine = lines[1]
+  const secondLine = lines[1]
   secondLine.should.contain('┌').and.contain('────').and.contain('┐')
 
-  var secondToLastLine = lines[lines.length - 3]
+  const secondToLastLine = lines[lines.length - 3]
   secondToLastLine.should.contain('└─').and.contain('─┘')
 }
 
 // Helper to "unwrap" boxed content
 module.exports = function (boxedContent) {
   assertIsBoxed(boxedContent)
-  var lines = boxedContent.split('\n')
+  const lines = boxedContent.split('\n')
 
-  var languages = trimBorders(lines[3]).split(' → ')
-  var source = languages[0]
-  var target = languages[1]
+  const languages = trimBorders(lines[3]).split(' → ')
+  const source = languages[0]
+  const target = languages[1]
 
   return {
     translation: trimBorders(lines[5]),

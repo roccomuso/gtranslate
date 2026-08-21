@@ -1,36 +1,36 @@
 #!/usr/bin/env node
 'use strict'
 const boxen = require('boxen')
-var argv = require('../lib/argv')
-var config = require('../lib/config')
+const argv = require('../lib/argv')
+const config = require('../lib/config')
 
-var API_KEY = config.getKey()
+const API_KEY = config.getKey()
 
 if (!API_KEY && !argv.register) {
-  exit(boxen('Missing API_KEY for google translate.\nUse the --register option', {align: 'center', borderColor: 'red', padding: 1, margin: 1}), 1)
+  exit(boxen('Missing API_KEY for google translate.\nUse the --register option', { align: 'center', borderColor: 'red', padding: 1, margin: 1 }), 1)
 }
 
 if (argv.register) {
   config.setKey(argv.register)
-  exit(boxen('\u2714 KEY stored!', {align: 'center', borderColor: 'green', padding: 1, margin: 1}), 0)
+  exit(boxen('✔ KEY stored!', { align: 'center', borderColor: 'green', padding: 1, margin: 1 }), 0)
 }
 
-var googleTranslate = require('google-translate')(API_KEY)
+const googleTranslate = require('../lib/google-translate')(API_KEY)
 
 if (argv.st) {
   config.setTargetLang(argv.st, googleTranslate)
-  exit(boxen('\u2714 Target lang set!', {align: 'center', borderColor: 'green', padding: 1, margin: 1}), 0)
+  exit(boxen('✔ Target lang set!', { align: 'center', borderColor: 'green', padding: 1, margin: 1 }), 0)
 }
 
-googleTranslate.translate(argv.text, argv.source, argv.target || config.getTargetLang(), function (err, translation) {
+googleTranslate.translate(argv.text, argv.source, argv.target || config.getTargetLang(), (err, translation) => {
   if (err) return exitWithError(err)
-  var translatedText = translation.translatedText
-  var sourceLanguage = translation.detectedSourceLanguage || argv.source
-  var targetLanguage = translation.targetLanguage || argv.target
+  const translatedText = translation.translatedText
+  const sourceLanguage = translation.detectedSourceLanguage || argv.source
+  const targetLanguage = translation.targetLanguage || argv.target
   if (argv.b) {
     process.stdout.write(translatedText)
   } else {
-    console.log(boxen(`${sourceLanguage} \u2192 ${targetLanguage}\n\n${translatedText} `, {align: 'center', borderColor: 'green', padding: 1, margin: 1}))
+    console.log(boxen(`${sourceLanguage} → ${targetLanguage}\n\n${translatedText} `, { align: 'center', borderColor: 'green', padding: 1, margin: 1 }))
   }
 })
 
@@ -44,13 +44,12 @@ function exit (msg, code) {
 // an error and a body inside the error that we should display
 // can be reproduced by using an invalid key or a key without persmissions
 function exitWithError (err) {
-  var hasErrorBody = err['response'] && err['response']['body']
+  const hasErrorBody = err.response && err.response.body
   if (!hasErrorBody) return exit(err, 1)
 
-  var body = JSON.parse(err['response']['body'])
-  var hasMessage = body['error'] && body['error']['message']
+  const body = JSON.parse(err.response.body)
+  const hasMessage = body.error && body.error.message
   if (!hasMessage) return exit(body, 1)
 
-  var message = body['error']['message']
-  return exit(message, 1)
+  return exit(body.error.message, 1)
 }

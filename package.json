@@ -8,8 +8,8 @@
     "gtranslate": "./bin/cli.js"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha",
-    "test-watch": "./node_modules/mocha/bin/mocha -w"
+    "test": "mocha",
+    "test-watch": "mocha -w"
   },
   "repository": {
     "type": "git",
@@ -29,16 +29,24 @@
     "url": "https://github.com/roccomuso/gtranslate/issues"
   },
   "homepage": "https://github.com/roccomuso/gtranslate#readme",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
-    "boxen": "^2.0.0",
-    "google-translate": "^2.2.0",
-    "jsonfile": "^5.0.0",
-    "yargs": "^12.0.2"
+    "boxen": "^5.1.2",
+    "jsonfile": "^6.2.0",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^5.2.0",
-    "standard": "^12.0.1"
+    "chai": "^4.5.0",
+    "mocha": "^11.7.5",
+    "standard": "^17.1.2"
+  },
+  "overrides": {
+    "mocha": {
+      "diff": "^8.0.2",
+      "serialize-javascript": "^7.1.0"
+    }
   },
   "standard": {
     "env": [
